@@ -197,7 +197,7 @@ Blockly.Css.CONTENT = [
   '}',
 
   '.blocklyGreenSelected>.blocklyPath {',
-    'stroke: #008000;',
+    'stroke: #33cc33;',
     'stroke-width: 3px;',
   '}',
 
