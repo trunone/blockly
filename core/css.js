@@ -196,6 +196,16 @@ Blockly.Css.CONTENT = [
     'stroke-width: 3px;',
   '}',
 
+  '.blocklyGreenSelected>.blocklyPath {',
+    'stroke: #008000;',
+    'stroke-width: 3px;',
+  '}',
+
+  '.blocklyRedSelected>.blocklyPath {',
+    'stroke: #ff0000;',
+    'stroke-width: 3px;',
+  '}',
+
   '.blocklySelected>.blocklyPathLight {',
     'display: none;',
   '}',

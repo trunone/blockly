@@ -132,6 +132,7 @@ Blockly.BlockSvg.prototype.select = function() {
     this.getParent().select();
     return;
   }
+
   if (Blockly.selected == this) {
     return;
   }
@@ -147,7 +148,7 @@ Blockly.BlockSvg.prototype.select = function() {
   event.workspaceId = this.workspace.id;
   Blockly.Events.fire(event);
   Blockly.selected = this;
-  this.addSelect();
+  this.addSelect(color);
   Blockly.fireUiEvent(this.workspace.getCanvas(), 'blocklySelectChange');
 };
 
@@ -1380,9 +1381,21 @@ Blockly.BlockSvg.prototype.setDisabled = function(disabled) {
 /**
  * Select this block.  Highlight it visually.
  */
-Blockly.BlockSvg.prototype.addSelect = function() {
-  Blockly.addClass_(/** @type {!Element} */ (this.svgGroup_),
-                    'blocklySelected');
+Blockly.BlockSvg.prototype.addSelect = function(color) {
+  switch (color) {
+    case 'Red':
+      Blockly.addClass_(/** @type {!Element} */ (this.svgGroup_),
+                        'blocklyRedSelected');
+      break;
+    case 'Green':
+      Blockly.addClass_(/** @type {!Element} */ (this.svgGroup_),
+                        'blocklyGreenSelected');
+      break;
+    default:
+      Blockly.addClass_(/** @type {!Element} */ (this.svgGroup_),
+                        'blocklySelected');
+  }
+
   // Move the selected block to the top of the stack.
   this.svgGroup_.parentNode.appendChild(this.svgGroup_);
 };
@@ -1393,6 +1406,10 @@ Blockly.BlockSvg.prototype.addSelect = function() {
 Blockly.BlockSvg.prototype.removeSelect = function() {
   Blockly.removeClass_(/** @type {!Element} */ (this.svgGroup_),
                        'blocklySelected');
+  Blockly.removeClass_(/** @type {!Element} */ (this.svgGroup_),
+                       'blocklyRedSelected');
+  Blockly.removeClass_(/** @type {!Element} */ (this.svgGroup_),
+                       'blocklyGreenSelected');
 };
 
 /**

@@ -421,7 +421,7 @@ Blockly.WorkspaceSvg.prototype.traceOn = function(armed) {
  * Highlight a block in the workspace.
  * @param {?string} id ID of block to find.
  */
-Blockly.WorkspaceSvg.prototype.highlightBlock = function(id) {
+Blockly.WorkspaceSvg.prototype.highlightBlock = function(id, color) {
   if (this.traceOn_ && Blockly.dragMode_ != Blockly.DRAG_NONE) {
     // The blocklySelectChange event normally prevents this, but sometimes
     // there is a race condition on fast-executing apps.
@@ -442,7 +442,7 @@ Blockly.WorkspaceSvg.prototype.highlightBlock = function(id) {
   this.traceOn(false);
   // Select the current block.
   if (block) {
-    block.select();
+    block.select(color);
   } else if (Blockly.selected) {
     Blockly.selected.unselect();
   }
