@@ -636,6 +636,30 @@ Blockly.BlockSvg.prototype.showContextMenu_ = function(e) {
   var block = this;
   var menuOptions = [];
 
+  if(this.breakpoint_ == false) {
+    var setBreakpointOption = {
+      // text: Blockly.Msg.SET_BREAKPOINT,
+      text: 'Set Breakpoint',
+      enabled: true,
+      callback: function() {
+        block.breakpoint_ = true;
+      }
+    };
+    menuOptions.push(setBreakpointOption);
+  }
+
+  if(this.breakpoint_ == true) {
+    var unsetBreakpointOption = {
+      // text: Blockly.Msg.SET_BREAKPOINT,
+      text: 'Unset Breakpoint',
+      enabled: true,
+      callback: function() {
+        block.breakpoint_ = false;
+      }
+    };
+    menuOptions.push(unsetBreakpointOption);
+  }
+
   if (this.isDeletable() && this.isMovable() && !block.isInFlyout) {
     // Option to duplicate this block.
     var duplicateOption = {

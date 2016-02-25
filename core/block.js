@@ -86,6 +86,8 @@ Blockly.Block = function(workspace, prototypeName, opt_id) {
   this.isShadow_ = false;
   /** @type {boolean} */
   this.collapsed_ = false;
+  /** @type {boolean} */
+  this.breakpoint_ = false;
 
   /** @type {string|Blockly.Comment} */
   this.comment = null;
