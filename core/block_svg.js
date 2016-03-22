@@ -426,7 +426,7 @@ Blockly.BlockSvg.prototype.setCollapsed = function(collapsed) {
   var renderList = [];
   // Show/hide the inputs.
   for (var i = 0, input; input = this.inputList[i]; i++) {
-    renderList.push.apply(renderList, input.setVisible(!collapsed));
+    renderList.push.apply(renderList, null);
   }
 
   var COLLAPSED_INPUT_NAME = '_TEMP_COLLAPSED_INPUT';

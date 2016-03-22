@@ -887,9 +887,10 @@ Blockly.Block.prototype.toString = function(opt_maxLength) {
     text.push(this.getInput('_TEMP_COLLAPSED_INPUT').fieldRow[0].text_);
   } else {
     for (var i = 0, input; input = this.inputList[i]; i++) {
-      for (var j = 0, field; field = input.fieldRow[j]; j++) {
-        text.push(field.getText());
-      }
+      if(input.isVisible())
+        for (var j = 0, field; field = input.fieldRow[j]; j++) {
+          text.push(field.getText());
+        }
       if (input.connection) {
         var child = input.connection.targetBlock();
         if (child) {
