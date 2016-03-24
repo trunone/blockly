@@ -86,11 +86,11 @@ Blockly.Block = function(workspace, prototypeName, opt_id) {
   this.isShadow_ = false;
   /** @type {boolean} */
   this.collapsed_ = false;
-  /** @type {boolean} */
-  this.breakpoint_ = false;
 
   /** @type {string|Blockly.Comment} */
   this.comment = null;
+  /** @type {boolean} */
+  this.breakpoint = false;
 
   /** @type {!goog.math.Coordinate} */
   this.xy_ = new goog.math.Coordinate(0, 0);

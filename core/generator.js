@@ -178,6 +178,7 @@ Blockly.Generator.prototype.blockToCode = function(block) {
       code = this.STATEMENT_PREFIX.replace(/%1/g, '\'' + block.id + '\'') +
           code;
     }
+    if (block.breakpoint) code = '@@@' + code;
     return this.scrub_(block, code);
   } else if (code === null) {
     // Block has handled code generation itself.

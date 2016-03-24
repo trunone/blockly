@@ -636,25 +636,25 @@ Blockly.BlockSvg.prototype.showContextMenu_ = function(e) {
   var block = this;
   var menuOptions = [];
 
-  if(this.breakpoint_ == false) {
+  if(this.breakpoint == false) {
     var setBreakpointOption = {
       // text: Blockly.Msg.SET_BREAKPOINT,
       text: 'Set Breakpoint',
       enabled: true,
       callback: function() {
-        block.breakpoint_ = true;
+        block.breakpoint = true;
       }
     };
     menuOptions.push(setBreakpointOption);
   }
 
-  if(this.breakpoint_ == true) {
+  if(this.breakpoint == true) {
     var unsetBreakpointOption = {
       // text: Blockly.Msg.SET_BREAKPOINT,
       text: 'Unset Breakpoint',
       enabled: true,
       callback: function() {
-        block.breakpoint_ = false;
+        block.breakpoint = false;
       }
     };
     menuOptions.push(unsetBreakpointOption);
