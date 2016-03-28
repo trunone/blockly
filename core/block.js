@@ -89,8 +89,6 @@ Blockly.Block = function(workspace, prototypeName, opt_id) {
 
   /** @type {string|Blockly.Comment} */
   this.comment = null;
-  /** @type {boolean} */
-  this.breakpoint = false;
 
   /** @type {!goog.math.Coordinate} */
   this.xy_ = new goog.math.Coordinate(0, 0);
@@ -1282,6 +1280,14 @@ Blockly.Block.prototype.setWarningText = function(text) {
  * @param {Blockly.Mutator} mutator A mutator dialog instance or null to remove.
  */
 Blockly.Block.prototype.setMutator = function(mutator) {
+  // NOP.
+};
+
+/**
+ * Give this block a mutator dialog.
+ * @param {Blockly.Mutator} mutator A mutator dialog instance or null to remove.
+ */
+Blockly.Block.prototype.setBreakpoint = function(breakpoint) {
   // NOP.
 };
 

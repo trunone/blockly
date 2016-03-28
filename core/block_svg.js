@@ -28,6 +28,7 @@ goog.provide('Blockly.BlockSvg');
 
 goog.require('Blockly.Block');
 goog.require('Blockly.ContextMenu');
+goog.require('Blockly.Breakpoint');
 goog.require('goog.Timer');
 goog.require('goog.asserts');
 goog.require('goog.dom');
@@ -191,6 +192,9 @@ Blockly.BlockSvg.prototype.warning = null;
  */
 Blockly.BlockSvg.prototype.getIcons = function() {
   var icons = [];
+  if (this.breakpoint) {
+    icons.push(this.breakpoint);
+  }
   if (this.mutator) {
     icons.push(this.mutator);
   }
@@ -636,31 +640,31 @@ Blockly.BlockSvg.prototype.showContextMenu_ = function(e) {
   var block = this;
   var menuOptions = [];
 
-  if(this.breakpoint == false) {
-    var setBreakpointOption = {
-      // text: Blockly.Msg.SET_BREAKPOINT,
-      text: 'Set Breakpoint',
-      enabled: true,
-      callback: function() {
-        block.breakpoint = true;
-      }
-    };
-    menuOptions.push(setBreakpointOption);
-  }
-
-  if(this.breakpoint == true) {
-    var unsetBreakpointOption = {
-      // text: Blockly.Msg.SET_BREAKPOINT,
-      text: 'Unset Breakpoint',
-      enabled: true,
-      callback: function() {
-        block.breakpoint = false;
-      }
-    };
-    menuOptions.push(unsetBreakpointOption);
-  }
-
   if (this.isDeletable() && this.isMovable() && !block.isInFlyout) {
+    if(this.breakpoint == null) {
+      var setBreakpointOption = {
+        // text: Blockly.Msg.SET_BREAKPOINT,
+        text: 'Set Breakpoint',
+        enabled: true,
+        callback: function() {
+          block.setBreakpoint(new Blockly.Breakpoint());
+        }
+      };
+      menuOptions.push(setBreakpointOption);
+    }
+
+    if(this.breakpoint) {
+      var unsetBreakpointOption = {
+        // text: Blockly.Msg.SET_BREAKPOINT,
+        text: 'Unset Breakpoint',
+        enabled: true,
+        callback: function() {
+          block.setBreakpoint();
+        }
+      };
+      menuOptions.push(unsetBreakpointOption);
+    }
+
     // Option to duplicate this block.
     var duplicateOption = {
       text: Blockly.Msg.DUPLICATE_BLOCK,
@@ -1370,6 +1374,26 @@ Blockly.BlockSvg.prototype.setWarningText = function(text, opt_id) {
   if (changedState && this.rendered) {
     this.render();
     // Adding or removing a warning icon will cause the block to change shape.
+    this.bumpNeighbours_();
+  }
+};
+
+/**
+ * Give this block a mutator dialog.
+ * @param {Blockly.Mutator} mutator A mutator dialog instance or null to remove.
+ */
+Blockly.Block.prototype.setBreakpoint = function(breakpoint) {
+  if (this.breakpoint && this.breakpoint !== breakpoint) {
+    this.breakpoint.dispose();
+  }
+  if (breakpoint) {
+    breakpoint.block_ = this;
+    this.breakpoint = breakpoint;
+    breakpoint.createIcon();
+  }
+  if (this.rendered) {
+    this.render();
+    // Adding or removing a comment icon will cause the block to change shape.
     this.bumpNeighbours_();
   }
 };
